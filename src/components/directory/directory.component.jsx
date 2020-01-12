@@ -8,7 +8,7 @@ const DirectoryMenu = ()=>{
         <div className="directory-menu">
             {
                 sections.map(item=>(
-                    <MenuItem {...item}/>
+                    <MenuItem key={item.id} {...item}/>
                 ))
             }
         </div>
