@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { auth } from '../../firebase/firebase.util'
 import CartIcon from '../cart-icon/cart-icon.component'
+import CartDropdown from '@/components/cart-dropdown/cart-dropdown.component'
 import { ReactComponent as Logo} from '../../assets/crown.svg'
-const Header = ({ currentUser })=>(
+const Header = ({ currentUser,hidden })=>(
     <div className="header">
        <Link className="logo-container" to='/'>
             <Logo className="logo"/>
@@ -20,11 +21,15 @@ const Header = ({ currentUser })=>(
             }
             <CartIcon/>
         </div>
+        {
+            hidden?null:<CartDropdown/>
+        }
     </div>
 )
 
-const mapStateToProps = state => ({ //state is top level root reducer
-    currentUser: state.user.currentUser
+const mapStateToProps = ({user:{currentUser},cart:{hidden}}) => ({ //state is top level root reducer
+    currentUser,
+    hidden
 })
 
 export default connect(mapStateToProps)(Header)
